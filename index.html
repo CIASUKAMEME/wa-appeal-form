@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Banding Nomor WhatsApp</title>
+</head>
+<body style="background:#111;color:#0f0;font-family:Arial;padding:20px;">
+  <h2>Form Banding Nomor WhatsApp</h2>
+
+  <form id="appealForm">
+    <label>Nomor WhatsApp (62xxxx):</label><br>
+    <input id="number" type="text" placeholder="628xxxx" required style="padding:10px;width:250px;"><br><br>
+    <button type="submit" style="padding:10px 20px;">Kirim Banding</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    document.getElementById("appealForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      document.getElementById("status").innerText = "Mengirim...";
+      const number = document.getElementById("number").value.trim();
+
+      try {
+        const res = await fetch("/api/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ number })
+        });
+        const data = await res.json();
+        document.getElementById("status").innerText = data.message || "Selesai";
+      } catch (err) {
+        document.getElementById("status").innerText = "Gagal: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
