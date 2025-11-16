@@ -25,21 +25,18 @@
     .box { 
       width: 300px; 
       padding: 25px; 
-      background: rgba(0,0,0,0.5);   /* hitam 50% transparan */
+      background: rgba(0,0,0,0.5);
       border-radius:10px; 
       box-shadow:0 0 15px rgba(0,0,0,0.5);
       color: #fff;
     }
 
-    /* Judul putih transparan + garis hitam transparan */
+    /* Judul: putih + outline hitam transparan */
     .title {
       text-align:center;
-      color: rgba(255,255,255,0.8); /* putih agak transparan */
-
+      color: rgba(255,255,255,0.8);
       font-weight:bold;
       font-size: 20px;
-
-      /* Outline (stroke) hitam transparan */
       text-shadow:
         -1px -1px 0 rgba(0,0,0,0.5),
          1px -1px 0 rgba(0,0,0,0.5),
@@ -61,7 +58,7 @@
       padding:10px; 
       margin-top:20px; 
       border:none; 
-      background:#ffffff; 
+      background:#ffffff;
       color:#000; 
       font-weight:bold; 
       cursor:pointer; 
@@ -88,52 +85,15 @@
 <script>
 function login() {
 
-    const USER = "rijaljr"      margin-top:10px; 
-      border:none; 
-      outline:none; 
-      border-radius:5px; 
-    }
-
-    button { 
-      width:100%; 
-      padding:10px; 
-      margin-top:20px; 
-      border:none; 
-      background:#0f0; 
-      color:#000; 
-      font-weight:bold; 
-      cursor:pointer; 
-      border-radius:5px;
-    }
-
-    #msg { margin-top:10px; color:#f00; text-align:center; }
-  </style>
-</head>
-<body>
-
-<div class="box">
-  <h2 style="text-align:center;">Masukan user & key untuk Mengakses</h2>
-
-  <input id="user" type="text" placeholder="Username">
-  <input id="pass" type="password" placeholder="Password">
-
-  <button onclick="login()">LOGIN</button>
-
-  <p id="msg"></p>
-</div>
-
-<script>
-function login() {
-
     const USER = "rijaljr";
     const PASS = "kntl";
 
-    let u = document.getElementById("user").value;
-    let p = document.getElementById("pass").value;
+    let u = document.getElementById("user").value.trim();
+    let p = document.getElementById("pass").value.trim();
 
     if (u === USER && p === PASS) {
-        localStorage.setItem("logged", "yes");
-        window.location.href = "index.html";
+        try { localStorage.setItem("logged", "yes"); } catch(e){}
+        window.location.href = "./index.html";
     } else {
         document.getElementById("msg").innerHTML = "Username atau Password salah!";
     }
