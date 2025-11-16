@@ -3,15 +3,34 @@
 <head>
   <title>Login</title>
   <style>
-    body { background:#000; color:#0f0; font-family:Arial; }
-    .box { 
-      margin:120px auto; 
-      width:300px; 
-      padding:25px; 
-      background:#111; 
-      border-radius:10px; 
-      box-shadow:0 0 10px #0f0;
+
+    /* Background foto fullscreen */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      /* GANTI FOTO DISINI */
+      background-image: url('https://files.catbox.moe/ocsxya.jpg');
     }
+
+    /* Kotak login (tanpa overlay) */
+    .box { 
+      width: 300px; 
+      padding: 25px; 
+      background: rgba(0,0,0,0.75);   /* bisa kamu ubah kalau mau lebih transparan */
+      border-radius:10px; 
+      box-shadow:0 0 15px #0f0;
+      color: #0f0;
+    }
+
     input { 
       width:100%; 
       padding:10px; 
@@ -20,6 +39,7 @@
       outline:none; 
       border-radius:5px; 
     }
+
     button { 
       width:100%; 
       padding:10px; 
@@ -31,6 +51,7 @@
       cursor:pointer; 
       border-radius:5px;
     }
+
     #msg { margin-top:10px; color:#f00; text-align:center; }
   </style>
 </head>
@@ -49,9 +70,9 @@
 
 <script>
 function login() {
-    // Username & password kamu
-    const USER = "rijaljr";   // ganti ini
-    const PASS = "maklu";   // ganti ini
+
+    const USER = "rijaljr";
+    const PASS = "maklu";
 
     let u = document.getElementById("user").value;
     let p = document.getElementById("pass").value;
