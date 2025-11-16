@@ -4,8 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Banding Nomor WhatsApp</title>
+
+  <!-- Proteksi login -->
+  <script>
+    if (localStorage.getItem("logged") !== "yes") {
+      window.location.href = "login.html";
+    }
+  </script>
 </head>
+
 <body style="background:#111;color:#0f0;font-family:Arial;padding:20px;">
+
+  <!-- Logout -->
+  <button onclick="logout()" style="position:fixed;top:10px;right:10px;padding:5px 10px;">
+    Logout
+  </button>
+
   <h2>Fix Merah Web v2.0</h2>
 
   <form id="appealForm">
@@ -17,6 +31,11 @@
   <p id="status"></p>
 
   <script>
+    function logout() {
+      localStorage.removeItem("logged");
+      window.location.href = "login.html";
+    }
+
     document.getElementById("appealForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       document.getElementById("status").innerText = "Mengirim...";
@@ -35,5 +54,6 @@
       }
     });
   </script>
+
 </body>
 </html>
