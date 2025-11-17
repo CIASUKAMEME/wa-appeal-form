@@ -5,7 +5,7 @@ async function login() {
   let msg = document.getElementById("msg");
 
   try {
-    let res = await fetch("adduser.txt");
+    let res = await fetch("/adduser.txt");
     let text = await res.text();
 
     let lines = text.split("\n").map(l => l.trim()).filter(l => l);
