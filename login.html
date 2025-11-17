@@ -16,12 +16,9 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-
-      /* GANTI FOTO DI SINI */
       background-image: url('https://files.catbox.moe/ocsxya.jpg');
     }
 
-    /* Kotak login: hitam transparan */
     .box { 
       width: 300px; 
       padding: 25px; 
@@ -31,7 +28,6 @@
       color: #fff;
     }
 
-    /* Judul: putih + outline hitam transparan */
     .title {
       text-align:center;
       color: rgba(255,255,255,0.8);
@@ -82,21 +78,51 @@
   <p id="msg"></p>
 </div>
 
+<!-- SCRIPT LOGIN DITARUH PALING BAWAH -->
 <script>
-function login() {
+async function login() {
 
-    const USER = "rijaljr";
-    const PASS = "kntl";
+  let u = document.getElementById("user").value.trim();
+  let p = document.getElementById("pass").value.trim();
+  let msg = document.getElementById("msg");
 
-    let u = document.getElementById("user").value.trim();
-    let p = document.getElementById("pass").value.trim();
+  try {
+    const res = await fetch("adduser.txt");
 
-    if (u === USER && p === PASS) {
-        try { localStorage.setItem("logged", "yes"); } catch(e){}
-        window.location.href = "./index.html";
-    } else {
-        document.getElementById("msg").innerHTML = "Username atau Password salah!";
+    if (!res.ok) {
+      msg.innerHTML = "File adduser.txt tidak ditemukan!";
+      return;
     }
+
+    const text = await res.text();
+    const lines = text.split("\n").map(l => l.trim()).filter(l => l);
+
+    let found = false;
+
+    for (let line of lines) {
+
+      const parts = line.split(":");
+      if (parts.length !== 2) continue;
+
+      const user = parts[0].trim();
+      const key  = parts[1].trim();
+
+      if (u === user && p === key) {
+        found = true;
+        break;
+      }
+    }
+
+    if (found) {
+      localStorage.setItem("logged", "yes");
+      window.location.href = "index.html";
+    } else {
+      msg.innerHTML = "User atau Key salah!";
+    }
+
+  } catch (e) {
+    msg.innerHTML = "Terjadi error saat membaca file!";
+  }
 }
 </script>
 
